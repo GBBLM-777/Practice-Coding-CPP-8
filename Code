@@ -1,11 +1,3 @@
-/*
-* Programmer: MANGONON, Gabriel Bom - Bom L.
-* Date Created: 9/23/2023
-* Terminal No: 00
-* Program: BSCS
-* Course / Section: CSS122L / FOPI01
-*/
-
 #include<iostream>
 #include<iomanip>
 #include<cstring>
