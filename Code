@@ -1,0 +1,245 @@
+/*
+* Programmer: MANGONON, Gabriel Bom - Bom L.
+* Date Created: 9/23/2023
+* Terminal No: 00
+* Program: BSCS
+* Course / Section: CSS122L / FOPI01
+*/
+
+#include<iostream>
+#include<iomanip>
+#include<cstring>
+#include<algorithm>
+#include<cstdlib>
+using namespace std;
+#include<conio.h>
+#include<windows.h>
+
+string sort(string str);//reaaranging the orders of string to test if its anagram
+bool areAnagrams(string str1, string str2);//process the strgin if anagram anf returns the value 1 or 0
+string RemSpacePunct(string str);//function that removes space and punctation in a string
+
+////////////////////////////////
+
+void palindrome(char sal[120]);//testing whether the c-string value is palindrome or not
+void password();//asking the user to enter the password
+char menu();//displaying choices a,b, and c then returns the answer
+void quit();//asking the user if he/she wants to quit
+string EnterPassword();//processing if the password is correct and diplaying it with "*" sign
+
+int main()
+{
+    char let,ans;
+    
+    //add code here
+    string pw;
+    system("cls");
+	password();
+	jump: //takes the user back to the menu without going back to entering the password again
+	ans = menu();
+    
+        switch(ans)
+        {
+            //add code here
+            /////////////////////////////////// PALINDROME ///////////////////////////////////////////
+            case 'a' : 
+            {
+                system("cls");
+                char pal[120];
+                cout << "[a] Check the palindrome" << endl;
+                cout << "Input the word: ";
+                cin.getline(pal,120);
+                palindrome(pal); 
+            }//end-case 'a'
+            break;
+
+            
+            /////////////////////////////////// ANAGRAM ///////////////////////////////////////////    
+            case 'b' :
+            {
+                system("cls");
+                string str1, str2, str3, str4;
+                cout << "[b] Check if strings are Anagram" << endl;
+                cout << "Testing whether the following strings are anagrams:" << endl;
+                cout << "enter string1: ";
+                getline(cin,str1);
+                cout << "enter string2: ";
+                getline(cin,str2);
+                cout << "string 1: " << str1 << endl
+                     << "string 2: " << str2 << endl;
+                str3 = RemSpacePunct(str1);
+                str4 = RemSpacePunct(str2);
+                if(areAnagrams(str3,str4))
+                    cout << "they are anagrams" << endl;
+                else
+                    cout << "they are NOT anagrams" << endl;
+            }//end-case 'b'
+            break;
+
+            
+            /////////////////////////////////// QUIT ///////////////////////////////////////////    
+            case 'c' :
+            {
+                quit();
+            }//end-case 'c'
+            break;
+        }//end-switch
+    
+        do
+        {
+            cout << "Do you want to try again [y/n]" << endl
+                 << "Choice: ";
+            cin >> let;
+            let = tolower(let);
+        }//end-do-while
+        while(let!='n' && let!='y');
+    
+    //add code here
+    if (let=='y')
+	{
+		system("cls"); 
+		goto jump; //takes the user back to the menu without going back to entering the password again
+	}
+	else if (let=='n')
+        main();
+    system("pause");
+    return 0;
+}//end-int main
+
+
+/////////////////////////////////// VOID-QUIT ///////////////////////////////////////////
+void quit()
+{
+    //add code here
+    char quit;
+	do
+    {
+		system("cls");
+        cout << "Do you want to quit now? [y/n]" << endl
+ 			 << "Choice: ";
+ 		cin >> quit;
+ 		quit = tolower(quit);
+		if (quit=='y')
+ 			exit(1);
+ 		else if (quit=='n')
+ 			main();
+ 	}//end-do-while
+    while(quit!='y' && quit!='n');
+}//end-void quit
+
+
+/////////////////////////////////// STRING-ENTERPASSWORD ///////////////////////////////////////////
+string EnterPassword()
+{
+    //add code here
+    string password = "";
+    char ch;
+    
+    ch = _getch();
+    
+    while(ch!=13)
+    {
+    	password.push_back(ch);
+    	cout << '*';
+    	ch = _getch();
+	}//end-while
+	
+	if(password=="Exer03")
+	{
+		system("cls");
+	}//end-if
+	else
+    {
+		system("cls");
+        cout << "sorry incorrect password...." << endl
+			 << " " << endl
+			 << "you have reached the maximum attempt for password." << endl;
+			exit (1);
+	}//end-else
+    return password;
+}//end-string EnterPassword
+
+
+/////////////////////////////////// CHAR-MENU ///////////////////////////////////////////
+char menu()
+{
+    //add code here
+    char choice;
+    do
+    {
+        system("cls");
+        cout << "[a] Check the palindrome" << endl
+             << "[b] Testing if the strings are Anagrams" << endl
+             << "[c] Quit" << endl;
+        cout << "Your choice: ";
+        cin >> choice;
+        cin.ignore();
+    }//end-do-while
+    while(choice!='a' && choice!='b' && choice!='c');
+    return choice;
+}//end-char menu
+
+
+/////////////////////////////////// VOID-PASSWORD ///////////////////////////////////////////
+void password()
+{
+    //add code here
+    system("cls");
+    cout << "Enter Password: ";
+    EnterPassword();
+}//end-void password
+
+
+/////////////////////////////////// STRING-SORT ///////////////////////////////////////////
+string sort(string str)
+{
+    //add code here
+    sort(str.begin(), str.end());
+    return str;
+}//end-string sort
+
+
+/////////////////////////////////// BOOL-AREANAGRAMS ///////////////////////////////////////////
+bool areAnagrams(string str1, string str2)
+{
+    //add code here
+    if(str1.compare(str2)==0)
+        return true;
+    else
+        return false;
+}//end-bool areAnagrams
+
+
+/////////////////////////////////// STRING-REMSPACEPUNCT ///////////////////////////////////////////
+string RemSpacePunct(string str)
+{
+    //add code here
+    string str2;
+    for(int i=0; i<str.length(); i++)
+    {
+        if (ispunct(str.at(i)) || isspace(str.at(i)))
+        {
+            str.erase(i, 1);
+            i--;
+        }//end-if
+    }//end-for
+    str2 = sort(str);
+    return str2;
+}//end-string RemSpacePunct
+
+
+/////////////////////////////////// VOID-PALINDROME ///////////////////////////////////////////
+void palindrome(char sal[120])
+{
+    //add code here
+    char las[120];
+    strcpy(las, sal);
+    strrev(las);
+    cout << "in reverse order: " << las << endl;
+    strlwr(sal);
+    strlwr(las);
+    if(strcmp(sal,las)==0)
+        cout << "The word is palindrome!" << endl;
+    else
+        cout << "The word is not palindrome" << endl;
+}//end-void palindrome
